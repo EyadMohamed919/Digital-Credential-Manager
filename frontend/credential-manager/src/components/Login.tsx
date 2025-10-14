@@ -4,20 +4,22 @@ import { useState } from "react";
 
 
 
-function Login()
+function Login({ onLogin }: { onLogin: (email: string) => void })
 {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    
     function authenticate()
     {
         if(email.includes("@") && password == "123")
         {
-            alert("Welcome");
+            onLogin(email)
         }
     }
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    
     return(
-        <div className="flex flex-col bg-white/15 rounded-md border-t-[1.5px] border-[0.3px] border-white/20 border-solid h-auto p-5 pt-10 pb-10 w-1/5 m-auto mt-5 mb-5">
+        <div className="shadow-lg flex flex-col bg-white/15 rounded-md border-t-[1.5px] border-[0.3px] border-white/20 border-solid h-auto p-5 pt-10 pb-10 w-1/5 m-auto mt-5 mb-5">
                 <h1 className="text-2xl m-auto mb-5 text-white ">Welcome</h1>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="email" className="font-thin border-solid border p-1 border-white/25 mb-2 text-lg bg-white/10 rounded-md text-white" />
                 <input value={password} onChange={(e) => setPassword(e.target.value)}  id="" type="text" placeholder="password" className="font-thin border-solid border p-1 border-white/25 mb-2 text-lg bg-white/10 rounded-md text-white" />
