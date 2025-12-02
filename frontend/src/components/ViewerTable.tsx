@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import axios from "axios";
-
+import { ThemeGlobalVariable } from "./global/ThemeContext";
 function ViewerTable()
 {
     interface person 
@@ -12,7 +12,7 @@ function ViewerTable()
     }
 
     const [isLoading, setLoading] = useState<Boolean>(true);
-
+    const THEME = useContext(ThemeGlobalVariable);
     const [people, setPeople] = useState<person[]>([{
         name:"Eyad",
         certificateType: "Certificate of Recognition",
@@ -49,18 +49,18 @@ function ViewerTable()
         <div className="w-full h-fit border-none border-2 rounded-md border-sky-600 mt-1 pt-2 pb-2">
             {!isLoading ?
             (<table className="w-full h-fit max-h-[200px]">
-                <thead className="bg-sky-600/25 rounded-lg">
-                    <td className="pl-2 pt-2 pb-3 text-sky-900 border-none border-2 mr-2">Student Name</td>
-                    <td className="pl-2 pt-2 pb-3 text-sky-900 border-none border-2 mr-2">Certificate Type</td>
-                    <td className="pl-2 pt-2 pb-3 text-sky-900 border-none border-2 mr-2">Status</td>
-                    <td className="pl-2 pt-2 pb-3 text-sky-900 border-none border-2 mr-2">Applying Date</td>
-                    <td className="pl-2 pt-2 pb-3 text-sky-900 border-none border-2 mr-2">Actions</td>
+                <thead className={THEME ? "table-head-dark" : "table-head-light"}>
+                    <td className="pl-2 pt-2 pb-3  border-none border-2 mr-2">Student Name</td>
+                    <td className="pl-2 pt-2 pb-3  border-none border-2 mr-2">Certificate Type</td>
+                    <td className="pl-2 pt-2 pb-3  border-none border-2 mr-2">Status</td>
+                    <td className="pl-2 pt-2 pb-3  border-none border-2 mr-2">Applying Date</td>
+                    <td className="pl-2 pt-2 pb-3  border-none border-2 mr-2">Actions</td>
                 </thead>
 
                 {
                     people.map((person:person)=>{
                         return(
-                            <tr className="bg-sky-600/10">
+                            <tr className={THEME ? "table-record-dark" : "table-record-light"}>
                                 <td className="pl-2 pt-1 pb-1">{person["name"]}</td>
                                 <td className="pl-2 pt-1 pb-1">{person["certificateType"]}</td>
                                 {
